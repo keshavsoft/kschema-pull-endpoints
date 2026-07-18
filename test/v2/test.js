@@ -7,7 +7,6 @@ const configPath = path.join(process.cwd(), "Config", "Schemas", "doctors.json")
 const doctorsJson = fs.readFileSync(configPath);
 
 load({
-    toPath: path.join(process.cwd(), "doctors"),
-    sacredWisdom: JSON.parse(doctorsJson),
-    inAction: "Crud"
+    toPath: path.join(process.cwd(), "api"),
+    sacredWisdom: JSON.parse(doctorsJson)
 });
