@@ -8,5 +8,6 @@ const doctorsJson = fs.readFileSync(configPath);
 
 load({
     toPath: path.join(process.cwd(), "api"),
-    sacredWisdom: JSON.parse(doctorsJson)
+    sacredWisdom: JSON.parse(doctorsJson),
+    inTargetPath: process.cwd()
 });
