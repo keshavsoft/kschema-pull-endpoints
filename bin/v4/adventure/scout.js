@@ -10,7 +10,8 @@ function scoutTheRealmForTargetJsons({ realmPath, inFileNameToCompare }) {
         fileNameToFilter: inFileNameToCompare
     });
 
-    return targetGems.map(gem => path.join(realmPath, gem));
+    // return targetGems.map(gem => path.join(realmPath, gem));
+    return targetGems;
 };
 
 export { scoutTheRealmForTargetJsons };

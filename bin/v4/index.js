@@ -11,17 +11,17 @@ const startFunc = ({ toPath, inAction = "Crud", inTargetPath }) => {
                 inFileNameToCompare: fileNameToCompare
             });
 
-            console.log("hiddenGems : ", fileNameToCompare, hiddenGems);
+            // console.log("hiddenGems : ", fileNameToCompare, hiddenGems);
 
-            // const trimmedPathsArray = trimPaths({
-            //     inPathsArray: hiddenGems,
-            //     inTargetPath, inFileNameToCompare: fileNameToCompare
-            // });
+            const trimmedPathsArray = trimPaths({
+                inPathsArray: hiddenGems,
+                inTargetPath, inFileNameToCompare: fileNameToCompare
+            });
 
-            // console.log("aaaaaaaa : ", trimmedPathsArray, hiddenGems);
+            console.log("aaaaaaaa : ", fileNameToCompare, trimmedPathsArray, hiddenGems);
 
             // transmuteGemsWithWisdom({ gems: hiddenGems, wisdom: sacredWisdom?.columnsConfig });
-
+            return trimmedPathsArray;
             break;
         default:
             break;
