@@ -1,0 +1,40 @@
+name: Update dependency
+
+on:
+  repository_dispatch:
+    types: [dependency-updated]
+
+permissions:
+  contents: write
+
+jobs:
+  update-dep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update node-fs-recursive dependency
+        run: |
+          npm install node-fs-recursive@latest
+
+      - name: Commit and push changes
+        run: |
+          git add package.json package-lock.json
+          git commit -m "chore(deps): update node-fs-recursive to latest [skip ci]" || echo "No changes to commit"
+          git push origin HEAD:main
