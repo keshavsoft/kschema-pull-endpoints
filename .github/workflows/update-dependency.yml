@@ -22,11 +22,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Install dependencies
         run: npm install
 
@@ -36,6 +31,19 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          # Check if there are changes
+          if git diff --quiet package.json package-lock.json; then
+            echo "No dependency changes detected."
+            exit 0
+          fi
+          
+          # Configure Git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Commit the changes
           git add package.json package-lock.json
-          git commit -m "chore(deps): update node-fs-recursive to latest [skip ci]" || echo "No changes to commit"
+          git commit -m "chore(deps): update node-fs-recursive to latest [skip ci]"
+          
+          # Push directly to main
           git push origin HEAD:main
