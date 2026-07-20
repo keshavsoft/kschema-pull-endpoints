@@ -1,13 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import nodeFsRec from "node-fs-recursive";
 
 function scoutTheRealmForTargetJsons({ realmPath, inFileNameToCompare }) {
     const allDiscoveries = fs.readdirSync(realmPath, { recursive: true });
 
-    const targetGems = allDiscoveries.filter(discovery => {
-        const itemName = path.basename(discovery);
-        const parentFolderName = path.basename(path.dirname(discovery)).toLowerCase();
-        return itemName === inFileNameToCompare;
+    const targetGems = nodeFsRec({
+        folderPath: realmPath,
+        fileNameToFilter: inFileNameToCompare
     });
 
     return targetGems.map(gem => path.join(realmPath, gem));
